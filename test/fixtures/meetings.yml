@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_of_event: 2021-02-04 17:52:56
+  commentary: MyString
+
+two:
+  date_of_event: 2021-02-04 17:52:56
+  commentary: MyString
