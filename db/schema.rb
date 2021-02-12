@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_04_165256) do
+ActiveRecord::Schema.define(version: 2021_02_12_162223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_02_04_165256) do
   create_table "customer_lists", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "service_provider_id", null: false
+    t.index ["service_provider_id"], name: "index_customer_lists_on_service_provider_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -26,6 +28,10 @@ ActiveRecord::Schema.define(version: 2021_02_04_165256) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "island_id", null: false
+    t.bigint "customer_list_id", null: false
+    t.index ["customer_list_id"], name: "index_customers_on_customer_list_id"
+    t.index ["island_id"], name: "index_customers_on_island_id"
   end
 
   create_table "islands", force: :cascade do |t|
@@ -39,12 +45,20 @@ ActiveRecord::Schema.define(version: 2021_02_04_165256) do
     t.string "commentary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "service_provider_id", null: false
+    t.bigint "customer_id", null: false
+    t.index ["customer_id"], name: "index_meetings_on_customer_id"
+    t.index ["service_provider_id"], name: "index_meetings_on_service_provider_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.datetime "purchased_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "customer_id", null: false
+    t.bigint "service_provider_id", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["service_provider_id"], name: "index_orders_on_service_provider_id"
   end
 
   create_table "service_providers", force: :cascade do |t|
@@ -52,6 +66,10 @@ ActiveRecord::Schema.define(version: 2021_02_04_165256) do
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "specialty_id", null: false
+    t.bigint "island_id", null: false
+    t.index ["island_id"], name: "index_service_providers_on_island_id"
+    t.index ["specialty_id"], name: "index_service_providers_on_specialty_id"
   end
 
   create_table "specialties", force: :cascade do |t|
@@ -62,4 +80,13 @@ ActiveRecord::Schema.define(version: 2021_02_04_165256) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "customer_lists", "service_providers"
+  add_foreign_key "customers", "customer_lists"
+  add_foreign_key "customers", "islands"
+  add_foreign_key "meetings", "customers"
+  add_foreign_key "meetings", "service_providers"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "service_providers"
+  add_foreign_key "service_providers", "islands"
+  add_foreign_key "service_providers", "specialties"
 end
