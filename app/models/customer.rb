@@ -4,5 +4,4 @@ class Customer < ApplicationRecord
   has_many :service_providers, through: :meetings
 
   belongs_to :island
-  belongs_to :customer_list
 end

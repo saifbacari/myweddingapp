@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_162223) do
+ActiveRecord::Schema.define(version: 2021_02_16_132025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 2021_02_12_162223) do
   create_table "customer_lists", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "service_provider_id", null: false
-    t.index ["service_provider_id"], name: "index_customer_lists_on_service_provider_id"
+    t.bigint "specialty_id", null: false
+    t.bigint "customer_id", null: false
+    t.index ["customer_id"], name: "index_customer_lists_on_customer_id"
+    t.index ["specialty_id"], name: "index_customer_lists_on_specialty_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -29,8 +31,6 @@ ActiveRecord::Schema.define(version: 2021_02_12_162223) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "island_id", null: false
-    t.bigint "customer_list_id", null: false
-    t.index ["customer_list_id"], name: "index_customers_on_customer_list_id"
     t.index ["island_id"], name: "index_customers_on_island_id"
   end
 
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_02_12_162223) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "customer_id", null: false
     t.bigint "service_provider_id", null: false
+    t.integer "quantity"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["service_provider_id"], name: "index_orders_on_service_provider_id"
   end
@@ -75,13 +76,12 @@ ActiveRecord::Schema.define(version: 2021_02_12_162223) do
   create_table "specialties", force: :cascade do |t|
     t.string "job_name"
     t.integer "price"
-    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "customer_lists", "service_providers"
-  add_foreign_key "customers", "customer_lists"
+  add_foreign_key "customer_lists", "customers"
+  add_foreign_key "customer_lists", "specialties"
   add_foreign_key "customers", "islands"
   add_foreign_key "meetings", "customers"
   add_foreign_key "meetings", "service_providers"

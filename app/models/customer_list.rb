@@ -1,5 +1,4 @@
 class CustomerList < ApplicationRecord
-  has_many :customers
-
-  belongs_to :service_provider
+  belongs_to :customer
+  belongs_to :specialty
 end
