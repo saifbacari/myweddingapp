@@ -1,0 +1,9 @@
+<% @service_providers.each do |service_provider| %>
+<h1><%= service_provider.first_name %></h1>
+<h2><%= service_provider.last_name %></h2>
+<% end %>
+
+ <%= link_to "Ajouter aux favoris", new_customer_customer_list_path(@customer)  %>
+
+
+

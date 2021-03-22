@@ -1,4 +1,4 @@
 class CustomerList < ApplicationRecord
   belongs_to :customer
-  belongs_to :specialty
+  belongs_to :service_provider
 end

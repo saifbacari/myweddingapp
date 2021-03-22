@@ -9,6 +9,17 @@
 
 require 'faker'
 
+puts "Cleaning database..."
+
+Customer.destroy_all
+CustomerList.all
+Island.destroy_all
+ServiceProvider.all
+Specialty.destroy_all
+
+puts "cleaning done"
+
+
 puts 'Creating 4 islands...'
 
 islands_name = [
@@ -76,36 +87,13 @@ puts "10 customers created !"
 puts "4 customer_lists"
 4.times do
   customer_list = CustomerList.new(
-    specialty_id: 1,
+    service_provider_id: 1,
     customer_id: 1
   )
   customer_list.save!
 end
 
 puts "4 customer lists created !"
-
-puts " 8 meetings"
-
-8.times do
-  meeting = Meeting.new(
-    service_provider_id: 1,
-    customer_id: 2,
-    date_of_event: Faker::Date.between(from: '2019-09-23', to: '2020-02-14')
-    )
-  meeting.save!
-end
-
-puts "4 orders"
-4.times do
-    order = Order.new(
-      customer_id: 1,
-      service_provider_id: 1,
-      quantity: 3
-    )
-    order.save!
-end
-
-puts "orders created!"
 
 
 puts 'finished!'
