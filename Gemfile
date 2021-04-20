@@ -58,3 +58,8 @@ gem 'faker'
 gem 'devise'
 
 gem 'simple_form'
+
+#frontend gems
+
+gem 'autoprefixer-rails'
+gem 'font-awesome-sass', '~> 5.6.1'
