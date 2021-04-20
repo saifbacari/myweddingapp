@@ -1,0 +1,68 @@
+#navbar-default {
+  overflow: hidden;
+  background-color: #42124e;
+  height:64px;
+}
+
+.button-sign-in, .button-sign-up {
+  top: 7px;
+  border-radius: 12px;
+  position: absolute;
+  border-style: none;
+  height: 49px;
+  font : 18px Roboto, sans-serif;
+  color: white;
+  width: 109px;
+  padding-top: 13px;
+  text-decoration: none;
+  text-align: center;
+
+}
+
+.button-sign-in:hover, .button-sign-up:hover {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.button-sign-in {
+  background-color: #928097;
+  left: 1234px;
+
+}
+
+.button-sign-up {
+  background-color: rgba(250, 21, 21, 0.35);
+  left: 1360px;
+
+}
+
+
+
+.logo{
+position: absolute;
+width: 188px;
+height: 63px;
+left: 340px;
+top: -5px;
+
+font-family: Satisfy, cursive;
+font-style: normal;
+font-weight: normal;
+font-size: 42px;
+line-height: 79px;
+
+color: #FFFFFF;
+
+mix-blend-mode: normal;
+}
+
+.logoDisabled{
+  color: currentColor;
+}
+
+.logoDisabled:hover{
+  text-decoration: none;
+  opacity: none;
+  color: currentColor;
+
+  }
